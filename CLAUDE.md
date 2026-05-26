@@ -22,6 +22,7 @@ Read `orchestrator.md` for full routing logic and cascade rules.
 | Tester | `agents/tester/agent.md` | test scripts, test coverage, PRD change reconciliation |
 | Backlog Manager | `agents/backlog/agent.md` | portfolio backlog, project backlog, stakeholder deck |
 | Prototype | `agents/prototype/agent.md` | wireframes, mockups, Figma |
+| User Research | `agents/user-research/agent.md` | assumption validation, user interviews, usability testing, synthesis, personas |
 
 ---
 
@@ -49,6 +50,11 @@ Always enforce these automatically — do not wait for the user to ask:
 | Feature removed | → Tester removes test cases for that feature |
 | Portfolio item added | → Backlog Manager re-prioritises and updates PPTX |
 | Prototype delivered | → Documentation logs design decisions in KDD |
+| Problem statement flagged as assumption-heavy | → User Research Agent: run discovery research before solutioning |
+| Competitive gap identified with no user validation | → User Research Agent: validate gap with research |
+| Research insight invalidates PRD requirement | → Documentation Agent: flag requirement for revision |
+| Research insight invalidates problem statement | → Strategy Agent: revisit problem definition |
+| Prototype delivered | → User Research Agent: run usability testing |
 
 ---
 
