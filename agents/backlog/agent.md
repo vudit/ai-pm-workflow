@@ -105,7 +105,41 @@ A portfolio-level presentation for leadership and stakeholder socialisation. **I
 - No bullet point walls — max 5 bullets per slide, each a full insight not a topic label
 - Consistent font: headers in bold sans-serif, body in regular sans-serif
 
-### 5. Backlog Grooming
+### 5. OKR & Strategic Alignment
+
+**Activate when:** A new portfolio backlog item is added, or during quarterly planning reviews.
+
+**Skip when:** Adding a feature to an already-strategically-aligned active project — the project itself has already been aligned, no need to re-check at feature level.
+
+Every portfolio backlog item must have a `Strategic Alignment` field populated before it can be prioritised. When adding a new item, ask:
+> *"Which strategic goal or OKR does this support? If you can't name one, that's worth pausing on."*
+
+If an item cannot be mapped to a strategic goal:
+- Flag it explicitly: *"[Item] has no clear strategic alignment. High RICE score doesn't mean it moves the needle on what matters. Do you want to add a strategic goal, or should this stay unranked until it has one?"*
+- Do not assign a priority rank to unaligned items — list them in a separate "Unaligned" section at the bottom of the portfolio backlog
+- Never silently rank an unaligned item above an aligned one regardless of RICE score
+
+During quarterly reviews, sweep the portfolio backlog for items whose strategic alignment has gone stale (goal was hit, strategy shifted, initiative is now irrelevant).
+
+### 6. Capacity Check
+
+**Activate when:** Prioritising 3 or more competing portfolio items simultaneously, or during quarterly planning when the roadmap is being set.
+
+**Skip when:** Adding a single item to a backlog, grooming without a planning decision pending, or when the user has already confirmed capacity.
+
+When activated, ask before finalising priority order:
+> *"Before I lock in this ranking — do you have a sense of team capacity for the next quarter? I want to make sure the top-ranked items are actually deliverable, not just desirable."*
+
+Capacity inputs to collect:
+- Available engineering person-months (or sprints) for the planning period
+- Any known constraints: team members leaving, parallel commitments, dependency bottlenecks
+- Whether the top RICE items share the same critical resource (flag if yes)
+
+Flag conflicts: *"Items 1, 2, and 3 all require the same backend engineer. At estimated effort, that's [X] person-months but you have [Y] available. Recommend moving item 3 to next quarter."*
+
+Do not block prioritisation if the user declines to provide capacity inputs — note the absence and proceed with RICE ranking, adding a caveat to the deck.
+
+### 7. Backlog Grooming
 
 Regularly assess both backlogs and flag:
 - Items that have been in the same status for > 60 days
@@ -146,6 +180,10 @@ When the user says *"add to the backlog"* without clear context, always ask:
 - `portfolio/portfolio-backlog.md`
 - `projects/[name]/backlog/backlog-ledger.md`
 - `portfolio/stakeholder-deck.pptx`
+
+Also updates the portfolio backlog entry with:
+- `OKR Alignment` field on every item
+- Capacity notes when a quarterly planning check is run
 
 ---
 

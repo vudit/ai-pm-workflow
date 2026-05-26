@@ -198,12 +198,148 @@ Maintain `projects/[name]/integrations.md` for every project:
 
 Never store raw API tokens in this file — always reference environment variables.
 
-### 8. Monitoring & Maintenance
+### 8. Definition of Ready & Definition of Done
+
+**Activate when:** A project moves from Discovery to In Progress. Always — this is lightweight and non-negotiable for any project entering delivery.
+
+**Skip when:** Project is in Idea or backlog stage — premature to define DoR/DoD before scope is known.
+
+Produce `projects/[name]/prd/definition-of-ready-done.md` with two checklists:
+
+**Definition of Ready (DoR)** — gates entry to engineering. A feature is not ready to be picked up until ALL of these are true:
+- [ ] Problem statement validated (Strategy Agent confirmed)
+- [ ] PRD written and reviewed — no open "Must Have" requirements
+- [ ] Acceptance criteria defined and testable for every requirement
+- [ ] Dependencies identified and confirmed available
+- [ ] Design / prototype complete if UI work is involved
+- [ ] Test cases written and reviewed
+- [ ] Effort estimated by engineering
+- [ ] Stakeholders have reviewed and signed off
+
+**Definition of Done (DoD)** — gates release. A feature is not done until ALL of these are true:
+- [ ] All acceptance criteria met and tested
+- [ ] Code reviewed and merged
+- [ ] No Critical or High defects open
+- [ ] Analytics events instrumented (if applicable)
+- [ ] Release notes drafted
+- [ ] Support team briefed (if customer-facing)
+- [ ] Stakeholders notified
+- [ ] Success metrics baseline recorded
+
+Tailor these checklists to the project — a small internal tool has a lighter DoD than a customer-facing feature. Ask the user if any items should be added or removed.
+
+### 9. Risk Register
+
+**Activate when:** Project has multiple cross-team dependencies, external integrations, tight deadlines, regulated data, or is high-value (significant financial or reputational exposure).
+
+**Skip when:** Simple single-team feature with no external dependencies and low blast radius if something goes wrong.
+
+Maintain `projects/[name]/risk-register.md`:
+
+```
+## [RISK-NNN] Risk Title
+
+| Field | Value |
+|---|---|
+| Raised | [date] |
+| Raised by | [who flagged this] |
+| Category | Technical / Process / Resource / External / Compliance |
+| Description | [What could go wrong] |
+| Likelihood | High / Medium / Low |
+| Impact | High / Medium / Low |
+| Risk Rating | Critical / High / Medium / Low (likelihood × impact) |
+| Mitigation | [What we're doing to reduce likelihood or impact] |
+| Contingency | [What we do if it happens anyway] |
+| Owner | [Who is watching this risk] |
+| Status | Open / Mitigated / Closed |
+| Last Updated | [date] |
+```
+
+Proactively raise risks when you see them — don't wait to be asked. Risks surface during PRD gap analysis, KDD review, and when dependencies are identified. Update the risk register and flag Critical/High risks to the user immediately.
+
+### 10. Engineering Handoff Brief
+
+**Activate when:** Project moves from Discovery/Design to In Progress (engineering pickup). Always produce this — it's the bridge between PRD and engineering.
+
+**Skip when:** Discovery or strategy-only phases, design-only work with no engineering component.
+
+Produce `projects/[name]/prd/engineering-handoff.md`:
+
+**Sections:**
+1. **TL;DR** — one paragraph: what are we building, why, and what does done look like?
+2. **Scope summary** — Must Have vs. Should Have vs. Nice to Have, clearly separated
+3. **Key flows** — numbered user flows for each major use case (not a PRD repeat — just the flows)
+4. **Technical considerations** — known constraints, integrations required, performance requirements, data model impacts
+5. **Out of scope** — explicit list of what is NOT in this build
+6. **Open questions for engineering** — anything the PRD left unresolved that engineering needs to answer
+7. **Dependencies** — external services, APIs, teams, with contact and status
+8. **Definition of Ready checklist** — link to DoR, confirm all items are checked before handoff
+9. **Success criteria** — what metric proves this worked after release?
+
+Keep it short — max 2 pages. Engineering teams should be able to read this in 5 minutes and know exactly what to build. If it's longer, it's not a handoff brief, it's a second PRD.
+
+### 11. Post-Launch Review
+
+**Activate when:** A project moves to Shipped status in the portfolio backlog.
+
+**Skip when:** Project is cancelled before shipping, or is a pure research/discovery engagement with no shipped artifact.
+
+Triggered automatically when Backlog Manager marks a project Shipped. Produce `projects/[name]/post-launch-review.md`:
+
+**Sections:**
+1. **What we shipped** — one-line summary of what was delivered
+2. **Success metrics review** — for each metric defined in the PRD: target vs. actual, with time period
+3. **What worked** — 2–3 things that went well (process, technical, team)
+4. **What didn't work** — 2–3 honest callouts (not blame, root cause)
+5. **User feedback** — any early signal from users since launch (support tickets, NPS, direct feedback)
+6. **Decisions revisited** — were any KDD decisions validated or invalidated by the outcome?
+7. **What we'd do differently** — concrete changes for the next project
+8. **Follow-on opportunities** — did this unlock something worth adding to the portfolio backlog?
+
+After completing the review:
+- Feed learnings back to Strategy Agent memory: *"Post-launch on [project] showed X — updating strategy memory"*
+- Flag any follow-on opportunities to Backlog Manager for portfolio consideration
+- Log any decision outcomes back to the KDD with "Post-launch validation" note
+
+### 12. GTM Coordination Checklist
+
+**Activate when:** External or user-facing feature, major new capability, or anything that requires users, customers, support, or marketing to know about it.
+
+**Skip when:** Internal tooling, bug fixes, infrastructure changes, or features explicitly marked as silent releases.
+
+When activated, produce `projects/[name]/gtm-checklist.md` and work through it before the project moves to Shipped:
+
+```
+## GTM Checklist — [Project Name]
+
+### Pre-launch
+- [ ] Release notes drafted — Owner: [name] — Status: [done/pending]
+- [ ] Support team briefed with FAQ — Owner: [name]
+- [ ] In-app comms / announcement drafted (if applicable)
+- [ ] Marketing / comms team notified (if external-facing)
+- [ ] Documentation / help centre updated
+- [ ] Internal stakeholders notified of go-live date
+
+### Launch
+- [ ] Feature flag / release confirmed
+- [ ] Monitoring alerts set for key metrics
+- [ ] Support team on standby for first 48 hours
+
+### Post-launch
+- [ ] Confirm release notes published
+- [ ] Monitor error rates and key metrics for 48 hours
+- [ ] Capture early user feedback
+```
+
+Raise the GTM checklist 1 week before the target ship date so there's time to complete it without rushing.
+
+### 13. Monitoring & Maintenance
 
 - Monitor for changes in other agents' outputs that require PRD or KDD updates
 - When the Strategy Agent updates the strategy doc, review PRD for alignment
 - When the Prototype Agent delivers, log design decisions in the KDD
 - When scope changes are confirmed, update PRD version, notify Tester and Backlog Manager, and sync to all connected tools
+- When Backlog Manager marks a project Shipped, trigger post-launch review automatically
 
 ---
 
@@ -229,6 +365,11 @@ Never store raw API tokens in this file — always reference environment variabl
 
 - `projects/[name]/prd/PRD_vX.X.docx`
 - `projects/[name]/prd/KDD.docx`
+- `projects/[name]/prd/definition-of-ready-done.md` (when project enters In Progress)
+- `projects/[name]/prd/engineering-handoff.md` (when project enters In Progress)
+- `projects/[name]/risk-register.md` (when activated — complex/high-value projects)
+- `projects/[name]/post-launch-review.md` (when project ships)
+- `projects/[name]/gtm-checklist.md` (when activated — external/user-facing projects)
 - `projects/[name]/session-notes/YYYY-MM-DD.md` (end of every session)
 - `projects/[name]/open-actions.md` (live, updated throughout session)
 - `projects/[name]/integrations.md` (tool connection config, created on project init)

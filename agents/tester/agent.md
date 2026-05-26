@@ -89,6 +89,46 @@ Every test case must:
 - Reference the PRD requirement it validates
 - Include at least one negative/edge case per functional area
 
+### 5. Security Review Checklist
+
+**Activate when:** PRD includes authentication, authorisation, user data handling, PII, payments, public-facing APIs, or the project is in a regulated industry (finance, health, retail compliance).
+
+**Skip when:** Pure internal admin tooling with no sensitive data, no auth changes, no external integrations.
+
+When activated, add a **Security** tab to the test script workbook covering at minimum:
+
+| Area | What to check |
+|---|---|
+| Authentication | Brute force protection, session timeout, password policy, MFA if applicable |
+| Authorisation | Role-based access — can User A access User B's data? Can a lower role perform higher-role actions? |
+| Input validation | SQL injection, XSS, script injection via all input fields |
+| Data exposure | API responses — are they returning more data than the UI needs? |
+| Sensitive data | Is PII masked in logs? Is it encrypted at rest and in transit? |
+| Error handling | Do error messages expose stack traces, internal paths, or system info? |
+| Session management | Are tokens invalidated on logout? Are cookies set with secure/httpOnly flags? |
+
+Flag any security requirement in the PRD that has no corresponding security test case back to the Documentation Agent.
+
+### 6. Accessibility Checklist
+
+**Activate when:** Any user-facing feature, public-facing product, or when accessibility requirements are mentioned in the PRD.
+
+**Skip when:** Internal admin tools with a controlled, known user base where accessibility is explicitly out of scope.
+
+When activated, add an **Accessibility** tab to the test script workbook covering WCAG 2.1 AA baseline:
+
+| Area | What to check |
+|---|---|
+| Keyboard navigation | All interactive elements reachable and operable via keyboard alone |
+| Screen reader | Key flows work with screen reader (NVDA/VoiceOver) — labels, roles, states announced correctly |
+| Colour contrast | Text meets 4.5:1 contrast ratio; UI components meet 3:1 |
+| Focus indicators | Visible focus state on all interactive elements |
+| Images/icons | All non-decorative images have descriptive alt text |
+| Forms | All inputs have associated labels; errors are announced |
+| Responsive/zoom | Content usable at 200% zoom without horizontal scrolling |
+
+Flag any accessibility requirement missing from the PRD back to the Documentation Agent.
+
 ---
 
 ## Interaction Style
