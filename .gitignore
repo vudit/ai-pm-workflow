@@ -1,0 +1,33 @@
+# -----------------------------------------------
+# AI PM Workflow — .gitignore
+# -----------------------------------------------
+# The framework files (agents/, orchestrator.md, CLAUDE.md, instructions.md)
+# are tracked and should be committed — that's what you forked this for.
+#
+# Your actual project work is personal. The rules below keep it local.
+# -----------------------------------------------
+
+# All real project folders (anything under projects/ except the template)
+projects/*/
+!projects/.template/
+!projects/.template/**
+
+# Portfolio artifacts — your specific backlog and deck are personal
+portfolio/stakeholder-deck.pptx
+portfolio/portfolio-backlog.md
+
+# Memory files — these are personal to your working style and decisions
+memory/*.md
+!memory/MEMORY.md
+
+# Reference materials you drop in — likely contain proprietary content
+reference/*
+!reference/README.md
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
