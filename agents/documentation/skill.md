@@ -27,18 +27,27 @@ Activate the Documentation Agent when the user's prompt contains:
 - "wrap up", "end session", "let's stop here", "that's all for today", "wrap this up"
 - "what did we cover", "session summary", "what are the open actions"
 
+### Tool Integrations
+- "connect to Confluence", "sync to Confluence", "push to Confluence", "Confluence space"
+- "connect to JIRA", "create JIRA tickets", "sync to JIRA", "JIRA project"
+- "connect to Notion", "sync to Notion", "push to Notion"
+- "connect to Linear", "sync to Linear", "Linear issues"
+- "set up integrations", "connect to [tool]", "sync this to [tool]", "push docs to"
+
 ---
 
 ## Activation Conditions
 
 | Condition | Action |
 |---|---|
-| Strategy Agent hands off finalized requirements | Activate — author initial PRD |
-| User says PRD needs updating | Activate — update with version control |
-| User makes a significant product decision | Activate — log in KDD |
+| Strategy Agent hands off finalized requirements | Activate — author initial PRD; ask integration setup question before writing |
+| New project PRD being initiated | Activate — ask: *"Would you like to sync to Confluence, JIRA, Notion, Linear, or another tool?"* |
+| User says PRD needs updating | Activate — update with version control; sync to connected tools |
+| User makes a significant product decision | Activate — log in KDD; sync to connected tools |
 | Prototype Agent delivers | Activate — log design decisions in KDD |
 | User asks for gap analysis | Activate — review PRD and surface gaps |
 | User asks to define success metrics | Activate — define metrics framework |
+| User asks to connect a tool | Activate — collect credentials, set up integration config, confirm connection |
 | User signals end of session | Activate — produce session handoff note; update open actions tracker |
 | Session starts | Activate — read most recent session note, summarise context in 3–4 sentences |
 | Any agent completes a significant task | Passive monitoring — capture decisions and actions raised |

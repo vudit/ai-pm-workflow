@@ -259,8 +259,9 @@ Every agent maintains memory files under `memory/`. Agents record decisions made
 - **Always listening** — passively monitors all conversation across every session, silently capturing decisions, actions, and unresolved questions
 - Produces **session handoff notes** at end of every session so next session starts with full context in seconds
 - Maintains the **open actions tracker** in real time throughout every session
+- **Tool integrations** — asks which tools to connect when a PRD is first initiated; syncs PRD and KDD to all connected tools on every update
 
-**Outputs:** `projects/[name]/prd/PRD_vX.X.docx`, `projects/[name]/prd/KDD.docx`, `projects/[name]/session-notes/YYYY-MM-DD.md`, `projects/[name]/open-actions.md`
+**Outputs:** `projects/[name]/prd/PRD_vX.X.docx`, `projects/[name]/prd/KDD.docx`, `projects/[name]/session-notes/YYYY-MM-DD.md`, `projects/[name]/open-actions.md`, `projects/[name]/integrations.md`
 
 ---
 
@@ -298,6 +299,41 @@ Every agent maintains memory files under `memory/`. Agents record decisions made
 - Follows brand guidelines if present in `reference/`
 - Hands off design decisions to Documentation agent for KDD logging
 - Iterates based on feedback
+
+---
+
+## Tool Integrations
+
+The Documentation Agent connects to your existing PM and documentation tools. When a PRD is first initiated for any project, the agent asks:
+
+> *"Would you like to sync this project's documentation to an external tool? Supported: Confluence, JIRA, Notion, Linear, GitHub Issues, or any other tool you use."*
+
+### Supported Tools
+
+| Tool | What gets synced |
+|---|---|
+| **Confluence** | PRD and KDD pages created and kept in sync on every update |
+| **JIRA** | Epics and stories created from functional requirements; tickets flagged when requirements change |
+| **Notion** | PRD and KDD synced as Notion pages |
+| **Linear** | Requirements mapped to Linear issues |
+| **GitHub Issues** | Requirements mapped to issues |
+| **Other** | Anything with an API — provide connection details and the agent will configure it |
+
+### Setup
+
+When connecting a tool, the agent will ask for the minimum required details:
+- **Confluence**: base URL, Space Key, API token
+- **JIRA**: base URL, Project Key, API token
+- **Notion**: Integration Token, Database/Page ID
+- **Linear**: API key, Team ID
+
+Credentials are stored as environment variable references only — never as raw values in files. Integration config is saved to `projects/[name]/integrations.md`.
+
+### Sync Behaviour
+
+- Every PRD version update → pushed to all connected tools automatically
+- Every KDD entry added → synced to connected tools
+- Agent announces every sync: *"PRD v1.3 synced to Confluence — [page link]"*
 
 ---
 

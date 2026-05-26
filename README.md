@@ -229,8 +229,9 @@ The PPTX deck is a **portfolio-level document** — it shows leadership the full
 - Performs gap analysis — surfaces missing requirements, integration impacts, edge cases
 - Passively monitors all conversation, silently capturing decisions and open questions
 - Produces session handoff notes and maintains the open actions tracker in real time
+- **Connects to your existing tools** — asks which tools to sync when a PRD is initiated; keeps docs in sync on every update
 
-**Outputs:** `PRD_vX.X.docx`, `KDD.docx`, `session-notes/YYYY-MM-DD.md`, `open-actions.md`
+**Outputs:** `PRD_vX.X.docx`, `KDD.docx`, `session-notes/YYYY-MM-DD.md`, `open-actions.md`, `integrations.md`
 
 ### Tester Agent
 
@@ -271,6 +272,24 @@ Ask the Orchestrator process questions at any time:
 ```
 
 The Orchestrator benchmarks your current state against PM best practices (SVPG, Shape Up, dual-track agile) and returns concrete, prioritised recommendations — naming specific gaps, why they matter, and what to do first.
+
+---
+
+## 🔌 Tool Integrations
+
+When a PRD is first initiated, the Documentation Agent asks:
+
+> *"Would you like to sync this project's docs to an external tool?"*
+
+| Tool | What gets synced |
+|---|---|
+| **Confluence** | PRD + KDD pages, kept in sync on every update |
+| **JIRA** | Epics and stories created from functional requirements |
+| **Notion** | PRD + KDD synced as Notion pages |
+| **Linear** | Requirements mapped to Linear issues |
+| **Other** | Anything with an API — provide connection details |
+
+Credentials are stored as environment variable references — never as raw values. Integration config lives in `projects/[name]/integrations.md`.
 
 ---
 
