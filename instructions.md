@@ -113,7 +113,7 @@ ai-pm-workflow/
 │       ├── agent.md
 │       └── skill.md
 │
-├── reference/                        ← drop any reference materials here
+├── reference/                        ← global/shared materials (brand guidelines, company-wide standards)
 │   └── README.md
 │
 ├── portfolio/
@@ -121,6 +121,8 @@ ai-pm-workflow/
 │
 ├── projects/                         ← one folder per active project
 │   └── [project-name]/
+│       ├── project.md                ← project dossier (read first every session)
+│       ├── reference/                ← project-specific reference materials
 │       ├── strategy/
 │       │   └── product-strategy.docx
 │       ├── prd/
@@ -132,7 +134,8 @@ ai-pm-workflow/
 │       │   └── backlog-ledger.md     ← feature/task backlog within this project only
 │       ├── session-notes/
 │       │   └── YYYY-MM-DD.md         ← end-of-session handoff notes (one per session)
-│       └── open-actions.md           ← live actions tracker, updated throughout sessions
+│       ├── open-actions.md           ← live actions tracker, updated throughout sessions
+│       └── dependencies.md           ← cross-project dependency declarations (upstream + downstream)
 │
 └── memory/                           ← shared cross-agent memory (auto-managed)
     ├── MEMORY.md
@@ -213,6 +216,9 @@ The following changes **always** trigger downstream agents automatically:
 ### Session Continuity & Context Persistence
 
 Context is never lost between sessions. Three layers work together to ensure every new session picks up exactly where the last one left off:
+
+**Layer 0 — Project Dossier** (`projects/[name]/project.md`)
+Stable facts that don't change session to session: tech stack, vendor, key stakeholders, integrations, lifecycle status, and pointers to all key artifacts. Read this first — it gives you the foundation before loading the dynamic layers.
 
 **Layer 1 — Session Handoff Notes** (`projects/[name]/session-notes/YYYY-MM-DD.md`)
 The Documentation Agent produces a structured note at the end of every session covering what was discussed, decisions made, open questions, open actions, and where to pick up next. This is the first thing read at the start of the following session — takes seconds to load, no raw transcript noise.
@@ -296,7 +302,7 @@ Every agent maintains memory files under `memory/`. Agents record decisions made
 
 - Reads PRD, strategy doc, and reference materials before opening Figma
 - Creates high-fidelity mockups and wireframes in Figma
-- Follows brand guidelines if present in `reference/`
+- Follows brand guidelines if present in `projects/[name]/reference/` or global `reference/`
 - Hands off design decisions to Documentation agent for KDD logging
 - Iterates based on feedback
 
@@ -354,15 +360,18 @@ The Orchestrator benchmarks your current state against PM best practices and giv
 
 ## Reference Materials
 
-Drop any supporting files into `reference/`:
-- Brand guidelines
+Each project has its own reference folder: `projects/[project-name]/reference/`
+
+Drop project-specific materials there:
+- User guides and process docs for the product being worked on
 - Technical architecture docs
 - Competitor analyses
 - User research reports
-- Design system specs
 - API documentation
 
-All agents check `reference/` when context is relevant to their task.
+For global materials that apply across all projects (brand guidelines, company-wide design system), use the top-level `reference/` folder.
+
+All agents check both locations when context is relevant to their task.
 
 ---
 

@@ -357,7 +357,7 @@ Raise the GTM checklist 1 week before the target ship date so there's time to co
 - Problem definitions and requirements from Strategy Agent
 - Scope changes and decisions from user
 - Design decisions from Prototype Agent
-- Reference materials from `reference/`
+- Reference materials from `projects/[name]/reference/` (project-specific) and `reference/` (global)
 
 ---
 

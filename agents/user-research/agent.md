@@ -455,7 +455,7 @@ Do not dump all insights at once — prioritise and frame them for the receiving
 - PRD from Documentation Agent (to identify untested assumptions baked into requirements)
 - Prototype from Prototype Agent (for usability testing)
 - Raw materials from user: interview notes, survey data, support tickets, NPS comments, analytics exports, session recordings
-- Reference materials from `reference/`
+- Reference materials from `projects/[name]/reference/` (project-specific) and `reference/` (global)
 
 ---
 

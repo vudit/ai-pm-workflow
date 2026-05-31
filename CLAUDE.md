@@ -45,8 +45,10 @@ Always enforce these automatically — do not wait for the user to ask:
 |---|---|
 | PRD changed | → Tester reconciles test scripts |
 | PRD changed | → Backlog Manager checks portfolio item status |
+| PRD or API contract changed in Project A | → Read `projects/[project-name]/dependencies.md`; if other projects list Project A as a dependency, flag the impact |
 | Strategy doc updated | → Documentation agent syncs PRD |
 | Project moves to In Progress | → Documentation creates PRD + KDD; Tester creates test workbook |
+| Project moves to Discovery | → Check portfolio backlog for items that list this project as a dependency; notify owner |
 | Feature removed | → Tester removes test cases for that feature |
 | Portfolio item added | → Backlog Manager re-prioritises and updates PPTX |
 | Prototype delivered | → Documentation logs design decisions in KDD |
@@ -62,7 +64,9 @@ Always enforce these automatically — do not wait for the user to ask:
 
 - Project artifacts live in `projects/[project-name]/`
 - Portfolio artifacts live in `portfolio/`
-- Reference materials live in `reference/`
+- Project-specific reference materials live in `projects/[project-name]/reference/`
+- Global/shared reference materials (brand guidelines, company-wide standards) live in `reference/`
+- Cross-project dependency tracking lives in `projects/[project-name]/dependencies.md`
 - Memory files live in `memory/`
 - Agent config lives in `agents/[agent-name]/`
 
@@ -77,3 +81,15 @@ When the user asks questions like *"what am I missing?"*, *"how can I improve th
 ## Memory
 
 Read `memory/MEMORY.md` at the start of every session to re-hydrate project context. Write new memories to `memory/` whenever a significant decision, correction, or pattern is observed.
+
+## Session Startup Protocol
+
+At the start of every session, load context in this order:
+
+1. `memory/MEMORY.md` — cross-project patterns, user preferences, feedback corrections
+2. `portfolio/portfolio-backlog.md` — current project landscape and lifecycle stages
+3. If a specific project is active: `projects/[name]/project.md` — stable project facts (tech stack, vendor, integrations, stakeholders)
+4. If a specific project is active: most recent `projects/[name]/session-notes/YYYY-MM-DD.md` — what happened last session, decisions made, where to pick up
+5. If a specific project is active: `projects/[name]/open-actions.md` — outstanding actions
+
+Steps 3–5 only when a project is clearly in context. Steps 1–2 always.

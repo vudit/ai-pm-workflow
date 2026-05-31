@@ -17,4 +17,4 @@
 
 ---
 
-*No memories yet — start a project and they'll build up naturally.*
+*Your memory index will appear here as agents learn your preferences and record decisions. This file is tracked in git as a template — the memory files it points to are gitignored and stay local to your machine.*

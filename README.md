@@ -105,13 +105,15 @@ ai-pm-workflow/
 │   ├── backlog/
 │   └── prototype/
 │
-├── reference/                        ← drop any reference materials here
+├── reference/                        ← global/shared materials (brand guidelines, company-wide standards)
 │
 ├── portfolio/
 │   └── portfolio-backlog.md          ← all initiatives across their lifecycle
 │
 ├── projects/                         ← one folder per active project
 │   └── [project-name]/
+│       ├── project.md                ← project dossier (read first every session)
+│       ├── reference/                ← project-specific reference materials
 │       ├── strategy/
 │       │   └── product-strategy.docx
 │       ├── prd/
@@ -123,7 +125,8 @@ ai-pm-workflow/
 │       │   └── backlog-ledger.md
 │       ├── session-notes/
 │       │   └── YYYY-MM-DD.md
-│       └── open-actions.md
+│       ├── open-actions.md
+│       └── dependencies.md           ← cross-project dependency declarations
 │
 └── memory/                           ← shared cross-agent memory (auto-managed)
     ├── MEMORY.md
@@ -255,7 +258,7 @@ The PPTX deck is a **portfolio-level document** — it shows leadership the full
 
 - Reads PRD, strategy doc, and reference materials before opening Figma
 - Creates high-fidelity mockups and wireframes
-- Follows brand guidelines if present in `reference/`
+- Follows brand guidelines if present in `projects/[name]/reference/` or global `reference/`
 - Hands off design decisions to Documentation agent for KDD logging
 
 ---
@@ -295,16 +298,18 @@ Credentials are stored as environment variable references — never as raw value
 
 ## 📚 Reference Materials
 
-Drop any supporting files into `reference/`:
+Each project has its own reference folder: `projects/[project-name]/reference/`
 
-- Brand guidelines
+Drop project-specific materials there:
+- User guides and process docs for the product being worked on
 - Technical architecture docs
 - Competitor analyses
 - User research reports
-- Design system specs
 - API documentation
 
-All agents check `reference/` when the context is relevant to their task.
+For global materials that apply across all projects (brand guidelines, company-wide design system), drop them in the top-level `reference/` folder.
+
+All agents check both locations when context is relevant to their task.
 
 ---
 

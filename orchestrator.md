@@ -94,6 +94,28 @@ When you identify gaps, respond with:
 
 ---
 
+## Cross-Project Dependency Management
+
+Each active project may have a `dependencies.md` file at `projects/[project-name]/dependencies.md` declaring what it depends on and what depends on it.
+
+### When to check dependencies.md
+
+| Situation | Action |
+|---|---|
+| PRD or API contract changes in Project A | Read `projects/[project-name]/dependencies.md`; if downstream projects are listed, flag the potential impact to the user — do not block the work |
+| Project moves to Discovery or In Progress | Check `portfolio/portfolio-backlog.md` for items that list this project as a dependency; surface any timeline or contract coordination needed |
+| New cross-project dependency identified | Create or update `dependencies.md` in both the upstream and downstream project |
+
+### How to announce a dependency impact
+
+Keep it brief — flag, don't block:
+
+> *"This PRD change touches the [shared API]. [project-b] depends on this backend — flagging for awareness. No action required now, but worth sharing with the [project-b] team when they reach Discovery."*
+
+The user decides whether to act. Log it in the relevant `open-actions.md` only if the user explicitly asks.
+
+---
+
 ## Multi-Agent Coordination Pattern
 
 When dispatching to multiple agents for a cascade:
@@ -119,14 +141,19 @@ Done. PRD is at v2.1, 8 test cases removed, portfolio backlog unchanged.
 
 ## Memory Protocol
 
-At session start:
-1. Read `memory/MEMORY.md` index
-2. Load any memory files flagged as relevant to the current project or conversation context
-3. Check `portfolio/portfolio-backlog.md` to orient on current project landscape
+At session start, load in this order:
+1. `memory/MEMORY.md` — cross-project patterns, user preferences, feedback corrections
+2. `portfolio/portfolio-backlog.md` — current project landscape and lifecycle stages
+3. If a specific project is active: `projects/[name]/project.md` — stable project facts (tech stack, vendor, integrations, stakeholders). This is the project dossier — read it before the session notes.
+4. If a specific project is active: most recent `projects/[name]/session-notes/YYYY-MM-DD.md` — what happened last session and where to pick up
+5. If a specific project is active: `projects/[name]/open-actions.md` — outstanding actions
+
+Steps 3–5 apply only when a project is clearly in context. Steps 1–2 apply always.
 
 During session:
 - Write a memory entry whenever a significant decision, correction, or pattern is observed
 - Update existing memories rather than creating duplicates
+- Update `project.md` if a stable fact changes (e.g. new vendor, lifecycle status change, new integration added)
 
 ---
 
